@@ -24,6 +24,8 @@ Then, if you want to change the lock idle time for the password protected page, 
 
 About the detail information, Please see "WP Hidden Password Protected Pages Settings" in Setting menu.
 
+deveploping version: https://github.com/kimipooh/wp-hidden-password-protected-pages
+
 == Screenshots ==
 
 1. Turn off this plugin (Normal View)
