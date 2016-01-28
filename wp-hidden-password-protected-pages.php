@@ -3,7 +3,7 @@
 Plugin Name: WP Hidden Password Protected Pages 
 Plugin URI: 
 Description: The plugin is for hiding the password protected pages (posts) in WordPress.
-Version: 1.0.2
+Version: 1.0.3
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 */
@@ -65,8 +65,8 @@ class wphppp{
 	}
 	
 	public function init_settings(){
-		$this->settings['version'] = 100;
-		$this->settings['db_version'] = 100;
+		$this->settings['version'] = 103;
+		$this->settings['db_version'] = 103;
 	}
 	
 	public function installer(){
@@ -98,13 +98,14 @@ class wphppp{
 				$cookie_time = "";
 			$settings[$this->cookie_time] =	$cookie_time;	
 		else:
-			$cookie_tile = "";
+			$cookie_time = "";
 		endif;
 
 		update_option($this->set_op , $settings);
 
 ?>
 <?php
+  $cookie_time = $settings[$this->cookie_time];
   if(isset($_POST[$this->cookie_time])):
 ?>
 <div class="<?php print $this->plugin_name;?>_updated"><p><strong><?php _e('Updated', $this->plugin_name); ?></strong></p></div>
@@ -124,14 +125,17 @@ class wphppp{
 	 </fieldset>
 	 <br/><br/>
      <fieldset style="border:1px solid #777777; width: 750px; padding-left: 6px;">
-		<legend><h3><?php _e('Turn off the plugin except Optional Settings.', $this->plugin_name); ?></h3></legend>
-		<div style="overflow:noscroll; height: 100px;">
+		<legend><h3><?php _e('Temporarily, Turn off the plugin except Optional Settings.', $this->plugin_name); ?></h3></legend>
+		<div style="overflow:noscroll; height: 120px;">
 		<p>
-		<?php if(!empty($settings[$this->disabled_wphppp])) $empty_flag = 'checked'; ?>
-		<input type="checkbox" name="wphppp_protected_disabled" value="disabled" <?php print $empty_flag; ?>/>
-			<?php _e('Turn off Hidden Password Protected Pages except Optional Settings.', $this->plugin_name); ?><br/>
+                <?php if(!empty($settings[$this->disabled_wphppp])) $empty_flag = 'checked'; ?>
+		<input type="checkbox" name="<?php print $this->disabled_wphppp;?>" value="disabled" <?php print $empty_flag; ?>/>
+			<?php _e('Temporarily, Turn off Hidden Password Protected Pages except Optional Settings.', $this->plugin_name); ?><br/>
 		</p>
-		<br/>
+  <p>
+			<?php _e('When you reload this page, the setting is turned off automatically.', $this->plugin_name); ?><br/>
+</p>
+<br/>
 		<input type="submit" value="<?php _e('Save', $this->plugin_name);  ?>" />
 		</div>
 	</fieldset>
@@ -160,6 +164,4 @@ class wphppp{
 <?php 
 	}
 
-
 }
-?>
