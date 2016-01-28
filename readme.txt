@@ -2,8 +2,8 @@
 Contributors: Kimiya Kitani
 Tags: Password Protected
 Requires at least: 4.0
-Tested up to: 4.3
-Stable tag: 1.0.2
+Tested up to: 4.4.1
+Stable tag: 1.0.3
 License: GPL v2
 
 The plugin is for hiding the password protected pages (posts) in WordPress.
@@ -35,6 +35,11 @@ deveploping version: https://github.com/kimipooh/wp-hidden-password-protected-pa
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.0.3 =
+* Tested up 4.4.1.
+* Fixed the explanation in the setting.
+
 
 = 1.0.2 =
 * Tested up 4.3.
