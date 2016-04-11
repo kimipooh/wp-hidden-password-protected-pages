@@ -36,10 +36,13 @@ deveploping version: https://github.com/kimipooh/wp-hidden-password-protected-pa
 
 == Changelog ==
 
+= 1.0.4 =
+* Tested up 4.5.
+* Preparing to migrate the translation function to GlotPress.
+
 = 1.0.3 =
 * Tested up 4.4.1.
 * Fixed the explanation in the setting.
-
 
 = 1.0.2 =
 * Tested up 4.3.
