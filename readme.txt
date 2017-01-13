@@ -2,8 +2,8 @@
 Contributors: Kimiya Kitani
 Tags: Password Protected
 Requires at least: 4.0
-Tested up to: 4.7
-Stable tag: 1.0.6
+Tested up to: 4.7.1
+Stable tag: 1.1.0
 License: GPL v2
 
 The plugin is for hiding the password protected pages (posts) in WordPress.
@@ -31,10 +31,19 @@ deveploping version: https://github.com/kimipooh/wp-hidden-password-protected-pa
 1. Turn off this plugin (Normal View)
 2. Turn on this plugin (Hidden Password Protected Page)
 3. Setting Menu
+4. View list typed post, page, aaaa (custom post) in functions.php
 
 == Frequently Asked Questions ==
 
+If you use custom posts or want to change the view list of password protected pages, please use add_filter; "whppp_get_protected_page_args".
+
+
 == Changelog ==
+
+= 1.1.0 =
+* Tested up 4.7.1
+* Fixed language translation for GlotPress.
+* Added the view function of the list of password protected page.
 
 = 1.0.6 =
 * Tested up 4.7.

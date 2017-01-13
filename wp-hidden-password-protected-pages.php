@@ -3,10 +3,10 @@
 Plugin Name: WP Hidden Password Protected Pages 
 Plugin URI: 
 Description: The plugin is for hiding the password protected pages (posts) in WordPress.
-Version: 1.0.6
+Version: 1.1.0
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
-Text Domain: wp-hidden-password-protected-pages
+Text Domain: wp-hidden-password-protected-page
 Domain Path: /lang
 */
 
@@ -14,7 +14,7 @@ $wm = new wphppp();
 
 class wphppp{
 	var $set_op = 'wp-hidden-password-protected-pages_array';	// Save setting name in DB
-	var $plugin_name = 'wp-hidden-password-protected-pages';
+	var $plugin_name = 'wp-hidden-password-protected-page';
 	var $lang_dir = 'lang';	// Language folder name
 	var $cookie_time = 'wphppp_protected_cookie_time';
 	var $cookie_time_max = 31622400;
@@ -67,7 +67,7 @@ class wphppp{
 	}
 	
 	public function init_settings(){
-		$this->settings['version'] = 106;
+		$this->settings['version'] = 110;
 		$this->settings['db_version'] = 104;
 	}
 	
@@ -102,7 +102,7 @@ class wphppp{
 		else:
 			$cookie_time = "";
 		endif;
-
+		
 		update_option($this->set_op , $settings);
 
 ?>
@@ -162,7 +162,41 @@ class wphppp{
 		</table>
 	    </div>
      </fieldset>
+<?php
+	$args = apply_filters('whppp_get_protected_page_args',array(
+		'has_password' 	=> true,
+		'numberposts' 	=> -1,
+		'orderby'         => 'post_modified',
+		'order'			=> 'DESC',
+	));
+	
+	$posts_list = get_posts($args);
+	if($posts_list):	
+?>
+	 <br/><br/>
+     <fieldset style="border:1px solid #777777; width: 750px; padding-left: 6px;">
+		<legend><h3><?php _e('List of Password Protected Pages', $this->plugin_name); ?></h3></legend>
+		<div style="overflow:scroll; height: 200px;">
 
+		<table><tr><td><?php _e('Last modified', $this->plugin_name); ?> 
+			(<?php _e('Author', $this->plugin_name); ?>)
+			<?php _e('Title', $this->plugin_name); ?><br/>
+			<ol>
+<?php
+		foreach($posts_list as $l_post): 
+			if(empty($l_post->post_title)) continue;
+			$userinfo = get_userdata($l_post->post_author);
+			echo '<li>' . esc_html($l_post->post_modified);
+			echo ' (' . esc_html($userinfo->user_login)  . ') ';
+			echo '<a href="' . esc_html(get_permalink($l_post->ID)) . '">' . esc_html($l_post->post_title) . '</a>' . "\n";
+		endforeach;	
+?>
+		</ol></td></tr></table>
+	    </div>
+     </fieldset>
+<?php
+	endif; // close list of password protected page
+?>
 <?php 
-	}
-}
+	} // close admin_settings_page function
+} // close class
