@@ -3,7 +3,7 @@
 Plugin Name: WP Hidden Password Protected Pages 
 Plugin URI: 
 Description: The plugin is for hiding the password protected pages (posts) in WordPress.
-Version: 1.1.0
+Version: 1.1.1
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: wp-hidden-password-protected-page
@@ -35,8 +35,16 @@ class wphppp{
 
 		// Optional
 		add_action('after_setup_theme', array(&$this,'my_after_setup_theme'));
+		
+		// Hidden password protected pages in archives.
+		if(!isset($this->settings[$this->disabled_wphppp]) || empty($this->settings[$this->disabled_wphppp]))
+			add_filter( 'getarchives_where' , 'my_posts_archive_where' , 10 , 2 );
+
+		function my_posts_archive_where($where,$r){
+			global $wpdb; 
+			return $where .= " AND $wpdb->posts.post_password = ''";
+		}
 	}
-	
 	public function my_posts_where($where){
 		global $wpdb;
 		if(!is_singular() && !is_admin())
@@ -67,7 +75,7 @@ class wphppp{
 	}
 	
 	public function init_settings(){
-		$this->settings['version'] = 110;
+		$this->settings['version'] = 111;
 		$this->settings['db_version'] = 104;
 	}
 	

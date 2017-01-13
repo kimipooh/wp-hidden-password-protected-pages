@@ -3,7 +3,7 @@ Contributors: Kimiya Kitani
 Tags: Password Protected
 Requires at least: 4.0
 Tested up to: 4.7.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPL v2
 
 The plugin is for hiding the password protected pages (posts) in WordPress.
@@ -40,6 +40,9 @@ If you use custom posts or want to change the view list of password protected pa
 
 == Changelog ==
 
+= 1.1.1 =
+* Fixed for wp_get_archives function
+ 
 = 1.1.0 =
 * Tested up 4.7.1
 * Fixed language translation for GlotPress.
