@@ -48,7 +48,7 @@ class wphppp{
 	public function my_posts_where($where){
 		global $wpdb;
 		if(!is_singular() && !is_admin())
-			$where .= " AND $wpdb->posts.post_password = ''";
+			$where .= " AND $wpdb->posts.post_password = '' ";
 
 		return $where;
 	}
