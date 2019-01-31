@@ -42,7 +42,7 @@ If you use custom posts or want to change the view list of password protected pa
 
 = 1.2.0 =
 * Tested up 5.0.3.
-* Added the function of hidden password protected pages in previous post and next post.
+* Added the function for hiding password protected pages in previous post and next post.
 
 = 1.1.3 =
 * Tested up 4.9.
