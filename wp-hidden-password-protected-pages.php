@@ -30,9 +30,12 @@ class wphppp{
 		add_action('plugins_loaded', array(&$this,'enable_language_translation'));
 
 		// Main 
-		if(!isset($this->settings[$this->disabled_wphppp]) || empty($this->settings[$this->disabled_wphppp]))
+		if(!isset($this->settings[$this->disabled_wphppp]) || empty($this->settings[$this->disabled_wphppp])){
 			add_filter('posts_where', array(&$this, 'my_posts_where'));
-
+			// Hidden password protected pages in previous post and next post.
+			add_filter('get_previous_post_where', array(&$this,'remove_password_post_links_adjacent'));
+			add_filter('get_next_post_where', array(&$this,'remove_password_post_links_adjacent'));
+		}
 		// Optional
 		add_action('after_setup_theme', array(&$this,'my_after_setup_theme'));
 		
@@ -45,10 +48,13 @@ class wphppp{
 			return $where .= " AND $wpdb->posts.post_password = ''";
 		}
 	}
+	public function remove_password_post_links_adjacent($where){
+			return $where . " AND post_password = '' ";
+	}
 	public function my_posts_where($where){
 		global $wpdb;
 		if(!is_singular() && !is_admin())
-			$where .= " AND $wpdb->posts.post_password = '' ";
+			$where .= " AND $wpdb->posts.post_password = ''";
 
 		return $where;
 	}
@@ -75,7 +81,7 @@ class wphppp{
 	}
 	
 	public function init_settings(){
-		$this->settings['version'] = 113;
+		$this->settings['version'] = 120;
 		$this->settings['db_version'] = 104;
 	}
 	
