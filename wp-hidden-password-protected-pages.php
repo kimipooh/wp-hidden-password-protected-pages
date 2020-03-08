@@ -3,7 +3,7 @@
 Plugin Name: WP Hidden Password Protected Pages 
 Plugin URI: 
 Description: The plugin is for hiding the password protected pages (posts) in WordPress.
-Version: 1.2.1
+Version: 1.2.2
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: wp-hidden-password-protected-page
@@ -100,25 +100,28 @@ class wphppp{
 		// The user who can manage the WordPress option can only access the Setting menu of this plugin.
 		if(current_user_can('manage_options')) $permission = true; 
 
-		// Main
-		if(isset($_POST[$this->disabled_wphppp])):
-			$settings[$this->disabled_wphppp] =  esc_attr($_POST[$this->disabled_wphppp]);
-		else:
-			$settings[$this->disabled_wphppp] = '';
-		endif;
-		
-		// Optional
-		if(isset($_POST[$this->cookie_time])):
-			$cookie_time = intval(sanitize_text_field($_POST[$this->cookie_time])); // Empty or Error: return 0
-			if($cookie_time < -1 || $cookie_time > $this->cookie_time_max)
-				$cookie_time = "";
-			$settings[$this->cookie_time] =	$cookie_time;	
-		else:
-			$cookie_time = "";
-		endif;
-		
-		update_option($this->set_op , $settings);
+		if(isset($_POST["whppp-form"]) && $_POST["whppp-form"]):
+			if(check_admin_referer("whppp-nonce-key", "whppp-form")):
+				// Main
+				if(isset($_POST[$this->disabled_wphppp])):
+					$settings[$this->disabled_wphppp] =  esc_attr($_POST[$this->disabled_wphppp]);
+				else:
+					$settings[$this->disabled_wphppp] = '';
+				endif;
 
+				// Optional
+				if(isset($_POST[$this->cookie_time])):
+					$cookie_time = intval(sanitize_text_field($_POST[$this->cookie_time])); // Empty or Error: return 0
+					if($cookie_time < -1 || $cookie_time > $this->cookie_time_max)
+						$cookie_time = "";
+					$settings[$this->cookie_time] =	$cookie_time;	
+				else:
+					$cookie_time = "";
+				endif;
+				
+				update_option($this->set_op , $settings);
+			endif;
+		endif;
 ?>
 <?php
   $cookie_time = $settings[$this->cookie_time];
@@ -132,6 +135,8 @@ class wphppp{
   <h2><?php _e('WP Hidden Password Protected Pages Settings', $this->plugin_name); ?></h2>
   
   <form method="post" action="">
+	<?php // for CSRF (Cross-Site Request Forgery): https://propansystem.net/blog/2018/02/20/post-6279/
+		wp_nonce_field("whppp-nonce-key", "whppp-form"); ?>  
      <fieldset style="border:1px solid #777777; width: 750px; padding-left: 6px;">
 		<legend><h3><?php _e('How to use it', $this->plugin_name); ?></h3></legend>
 		<div style="overflow:noscroll; height: 150px;">
