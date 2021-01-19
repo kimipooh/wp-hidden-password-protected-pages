@@ -42,6 +42,7 @@ If you use custom posts or want to change the view list of password protected pa
 = 1.2.3 =
 * Fixed some variable check.
 * Fixed the load_plugin_textdomain parameter. 
+* Add the function for deleting the setting values from the DB when the plugin is removed.
 
 = 1.2.2 =
 * Added the response of CSRF (Cross-Site Request Forgery) vulnerability for this plugin's settings.
