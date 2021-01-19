@@ -3,7 +3,7 @@
 Plugin Name: WP Hidden Password Protected Pages 
 Plugin URI: 
 Description: The plugin is for hiding the password protected pages (posts) in WordPress.
-Version: 1.2.2
+Version: 1.2.3
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: wp-hidden-password-protected-page
@@ -77,18 +77,19 @@ class wphppp{
 	}
 
 	public function enable_language_translation(){
-		load_plugin_textdomain($this->plugin_name, false, dirname( plugin_basename( __FILE__ ) ) . '/' . $this->lang_dir . '/');
+		 load_plugin_textdomain($this->plugin_name) 
+		 	or load_plugin_textdomain($this->plugin_name, false, dirname( plugin_basename( __FILE__ ) ) . '/' . $this->lang_dir . '/');
 	}
 	
 	public function init_settings(){
-		$this->settings['version'] = 120;
+		$this->settings['version'] = 123;
 		$this->settings['db_version'] = 104;
 	}
 	
 	public function installer(){
 		update_option($this->set_op , $this->settings);
 	}
-
+	
 	function add_to_settings_menu(){
 		add_options_page(__('WP Hidden Password Protected Pages Settings', $this->plugin_name), __('WP Hidden Password Protected Pages Settings',$this->plugin_name), 'manage_options', __FILE__,array(&$this,'admin_settings_page'));
 	}
@@ -124,7 +125,10 @@ class wphppp{
 		endif;
 ?>
 <?php
-  $cookie_time = $settings[$this->cookie_time];
+  $cookie_time = "";
+  if(isset($settings[$this->cookie_time])):
+	$cookie_time = $settings[$this->cookie_time];
+  endif;
   if(isset($_POST[$this->cookie_time])):
 ?>
 <div class="<?php print $this->plugin_name;?>_updated"><p><strong><?php _e('Updated', $this->plugin_name); ?></strong></p></div>
@@ -149,7 +153,7 @@ class wphppp{
 		<legend><h3><?php _e('Temporarily, Turn off the plugin except Optional Settings.', $this->plugin_name); ?></h3></legend>
 		<div style="overflow:noscroll; height: 120px;">
 		<p>
-                <?php if(!empty($settings[$this->disabled_wphppp])) $empty_flag = 'checked'; ?>
+                <?php $empty_flag = ""; if(!empty($settings[$this->disabled_wphppp])) $empty_flag = 'checked'; ?>
 		<input type="checkbox" name="<?php print $this->disabled_wphppp;?>" value="disabled" <?php print $empty_flag; ?>/>
 			<?php _e('Temporarily, Turn off Hidden Password Protected Pages except Optional Settings.', $this->plugin_name); ?><br/>
 		</p>
