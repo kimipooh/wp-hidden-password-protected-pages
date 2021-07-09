@@ -2,7 +2,7 @@
 Contributors: Kimiya Kitani
 Tags: Password Protected
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.8
 Stable tag: 1.2.3
 License: GPL v2
 
@@ -43,6 +43,7 @@ If you use custom posts or want to change the view list of password protected pa
 * Fixed some variable check.
 * Fixed the load_plugin_textdomain parameter. 
 * Add the function for deleting the setting values from the DB when the plugin is removed.
+* Tested up WordPress 5.8 with PHP 8.0.
 
 = 1.2.2 =
 * Added the response of CSRF (Cross-Site Request Forgery) vulnerability for this plugin's settings.
