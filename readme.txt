@@ -1,5 +1,5 @@
 === WP Hidden Password Protected Pages ===
-Contributors: Kimiya Kitani
+Contributors: kimipooh
 Tags: Password Protected
 Requires at least: 4.0
 Tested up to: 6.5.2
