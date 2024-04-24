@@ -1,8 +1,8 @@
 === WP Hidden Password Protected Pages ===
 Contributors: Kimiya Kitani
 Tags: Password Protected
-Requires at least: 5.6
-Tested up to: 6.1
+Requires at least: 4.0
+Tested up to: 6.5.2
 Stable tag: 1.2.3
 License: GPL v2
 
@@ -45,9 +45,7 @@ If you use custom posts or want to change the view list of password protected pa
 * Add the function for deleting the setting values from the DB when the plugin is removed.
 * Tested up WordPress 5.8 with PHP 8.0.
 * Tested up WordPress 6.0.
-* Tested up WordPress 6.1.
-* Changed the supported version of WordPress from 4.0 to 5.4 or higher.
-
+* Tested up WordPress 6.5.2 with PHP 8.3.6.
 
 = 1.2.2 =
 * Added the response of CSRF (Cross-Site Request Forgery) vulnerability for this plugin's settings.
