@@ -3,7 +3,7 @@
 Plugin Name: WP Hidden Password Protected Pages 
 Plugin URI: 
 Description: The plugin is for hiding the password protected pages (posts) in WordPress.
-Version: 1.2.3
+Version: 1.2.4
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: wp-hidden-password-protected-page
@@ -63,10 +63,7 @@ class wphppp{
 		if(isset($settings[$this->cookie_time]) && isset( $_COOKIE['wp-postpass_' . COOKIEHASH] )):
 			$cookie_time = intval(sanitize_text_field($settings[$this->cookie_time])); // Empty or Error: return 0
 
-			if ( get_magic_quotes_gpc() )
-				$co = esc_attr(stripslashes($_COOKIE['wp-postpass_' . COOKIEHASH]));
-			else
-				$co = esc_attr($_COOKIE['wp-postpass_' . COOKIEHASH]);
+			$co = esc_attr($_COOKIE['wp-postpass_' . COOKIEHASH]);
 
 			if($cookie_time > 0 && $cookie_time <= $this->cookie_time_max):
 				setcookie('wp-postpass_' . COOKIEHASH,  $co , time()+$cookie_time, COOKIEPATH);
@@ -82,7 +79,7 @@ class wphppp{
 	}
 	
 	public function init_settings(){
-		$this->settings['version'] = 123;
+		$this->settings['version'] = 124;
 		$this->settings['db_version'] = 104;
 	}
 	
@@ -150,15 +147,13 @@ class wphppp{
 	 </fieldset>
 	 <br/><br/>
      <fieldset style="border:1px solid #777777; width: 750px; padding-left: 6px;">
-		<legend><h3><?php _e('Temporarily, Turn off the plugin except Optional Settings.', $this->plugin_name); ?></h3></legend>
+		<legend><h3><?php _e('Turn off the plugin except Optional Settings.', $this->plugin_name); ?></h3></legend>
 		<div style="overflow:noscroll; height: 120px;">
 		<p>
                 <?php $empty_flag = ""; if(!empty($settings[$this->disabled_wphppp])) $empty_flag = 'checked'; ?>
 		<input type="checkbox" name="<?php print $this->disabled_wphppp;?>" value="disabled" <?php print $empty_flag; ?>/>
-			<?php _e('Temporarily, Turn off Hidden Password Protected Pages except Optional Settings.', $this->plugin_name); ?><br/>
+			<?php _e('Turn off Hidden Password Protected Pages except Optional Settings.', $this->plugin_name); ?><br/>
 		</p>
-  <p>
-			<?php _e('When you reload this page, the setting is turned off automatically.', $this->plugin_name); ?><br/>
 </p>
 <br/>
 		<input type="submit" value="<?php _e('Save', $this->plugin_name);  ?>" />

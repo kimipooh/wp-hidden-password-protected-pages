@@ -1,9 +1,9 @@
 === WP Hidden Password Protected Pages ===
 Contributors: kimipooh
 Tags: Password Protected
-Requires at least: 4.0
-Tested up to: 6.5.2
-Stable tag: 1.2.3
+Requires at least: 6.0
+Tested up to: 6.7.2
+Stable tag: 1.2.4
 License: GPL v2
 
 The plugin is for hiding the password protected pages (posts) in WordPress.
@@ -39,6 +39,10 @@ If you use custom posts or want to change the view list of password protected pa
 
 
 == Changelog ==
+= 1.2.4 =
+* Tested up WordPress 6.7.2 with PHP 8.3.19 and 8.4.5.
+* Remove "get_magic_quotes_gpc" function.
+
 = 1.2.3 =
 * Fixed some variable check.
 * Fixed the load_plugin_textdomain parameter. 

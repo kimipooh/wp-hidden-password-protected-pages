@@ -19,7 +19,7 @@ jobs:
       matrix:
         # Notes regarding supported versions in WP:
         # The base matrix only contains the PHP versions which are supported on all supported WP versions.
-        php: ['5.6', '7.0', '7.4', '8.0']
+        php: ['7.4', '8.0', '8.1', '8.2','8.3','8.4']
         wp: ['latest']
         experimental: [false]
 
@@ -28,22 +28,30 @@ jobs:
           # PHP 8.1 is sort of supported since WP 5.9.
           # PHP 8.0 is sort of supported since WP 5.6.
           # PHP 7.4 is supported since WP 5.3.
+          - php: '8.4'
+            wp: 'latest'
+            experimental: false
+            phpunit: 12.0
+          - php: '8.3'
+            wp: 'latest'
+            experimental: false
+            phpunit: 12.0
+          - php: '8.2'
+            wp: 'latest'
+            experimental: false
+            phpunit: 11.5
+          - php: '8.1'
+            wp: 'latest'
+            experimental: false
+            phpunit: 10.5
           - php: '8.0'
             wp: 'latest'
             experimental: false
-          - php: '8.0'
-            wp: '5.6'
-            experimental: false
+            phpunit: 9.5
           - php: '7.4'
             wp: 'latest'
             experimental: false
-          - php: '7.4'
-            wp: '5.4'
-            experimental: false
-          # Experimental builds. These are allowed to fail.
-          - php: '7.4'
-            wp: 'trunk'
-            experimental: true
+            phpunit: 9.5
 
     name: "PHP ${{ matrix.php }} - WP ${{ matrix.wp }}"
 
@@ -75,6 +83,7 @@ jobs:
           coverage: none
           # The PHP 5.6 and 7.0 images don't include mysql[i] by default.
           extensions: mysqli
+          tools: phpunit:${{ matrix.phpunit }}
 
       - name: Set up WordPress
         run: phpunit/install.sh wordpress_test root '' 127.0.0.1:3306 ${{ matrix.wp }}
