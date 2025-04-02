@@ -3,7 +3,7 @@
 Plugin Name: WP Hidden Password Protected Pages 
 Plugin URI: 
 Description: The plugin is for hiding the password protected pages (posts) in WordPress.
-Version: 1.2.4
+Version: 1.2.5
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: wp-hidden-password-protected-page
@@ -79,7 +79,7 @@ class wphppp{
 	}
 	
 	public function init_settings(){
-		$this->settings['version'] = 124;
+		$this->settings['version'] = 125;
 		$this->settings['db_version'] = 104;
 	}
 	
